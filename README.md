@@ -7,14 +7,15 @@
 - Διαχειριστές: Δημιουργία/τροποποίηση προγραμμάτων, διαχείριση πωλητών.
 
 ## 📡 Τεχνολογίες
-Backend: ASP.NET Core MVC
-Frontend: Razor Views, HTML, CSS
-Database: SQL Server
-Development Environment: Visual Studio 2022
+- Backend: ASP.NET Core MVC
+- Frontend: Razor Views, HTML, CSS
+- Database: SQL Server
+- Development Environment: Visual Studio 2022
 
 ## 📕 Οδηγίες
 Είναι ένα απλό MVC C# ASP.NET Web Application. Για τη σύνδεση της βάσης πρέπει να δημιουργηθεί ένα SQL Database και να εισαχθεί το **Connection String** στο αρχείο appsettings.json στο πεδίο DefaultConnectionString
 Παράδειγμα αρχείου appsettings.json:
+
 ````json
 {
   "Logging": {
@@ -28,3 +29,11 @@ Development Environment: Visual Studio 2022
     "DefaultConnectionString": "" // <-- Δώσε Connection String από το Data Connection
   }
 }
+````
+
+## 📷 Εικόνες
+
+![image](https://github.com/user-attachments/assets/80175e18-7852-4c60-9986-6582ae36ee27)
+
+
+![image](https://github.com/user-attachments/assets/e94cee2b-c3fd-45d3-a832-ca88b5dfa579)
