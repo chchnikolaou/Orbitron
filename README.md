@@ -15,7 +15,8 @@ Development Environment: Visual Studio 2022
 # Οδηγίες
 Είναι ένα απλό MVC C# ASP.NET Web Application. Για τη σύνδεση της βάσης πρέπει να δημιουργηθεί ένα SQL Database και να εισαχθεί το **Connection String** στο αρχείο appsettings.json στο πεδίο DefaultConnectionString
 Παράδειγμα αρχείου appsettings.json:
-````json {
+````json
+{
   "Logging": {
     "LogLevel": {
       "Default": "Information",
