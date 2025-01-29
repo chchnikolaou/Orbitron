@@ -1,0 +1,164 @@
+﻿@model Orbitron.Models.ViewModels.ClientPhoneViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["TITLE"] = "Client Dashboard";
+
+}
+
+<link rel="stylesheet" href="~/css/client/account.css" asp-append-version="true" />
+<script src="~/js/popover.js" asp-append-version="true"></script>
+
+<div class="account-container">
+
+
+    <div class="client-control">
+
+        <div class="links">
+            <a class="client-link hover-underline active">Προβολή Λογαριασμού</a>
+            <a class="client-link hover-underline" asp-controller="Client" asp-action="History">Προβολή Ιστορικού Κλήσεων</a>
+            <a class="client-link hover-underline" asp-controller="Client" asp-action="Bill">Εξόφληση Λογαριασμού</a>
+        </div>
+    </div>
+
+    <div class="account">
+        <div class="account-personal">
+            <h2>Καλώς Ήρθες, @Model.Client.FirstName!</h2>
+            <span>
+                Κατάσταση: <b style="@(string.IsNullOrEmpty(Model.Client.PhoneNumber) ? "color:var(--danger);" : "color:var(--success);")">
+                    @(string.IsNullOrEmpty(Model.Client.PhoneNumber) ? "Ανενεργή" : "Ενεργή")
+                </b>
+            </span>
+        </div>
+        <div class="information">
+
+            <div class="account-details">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Προσωπικά Στοιχεία</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>Όνομα</b></td>
+                            <td>@Model.Client.FirstName</td>
+                        </tr>
+                        <tr>
+                            <td><b>Επώνυμο</b></td>
+                            <td>@Model.Client.LastName</td>
+                        </tr>
+                        <tr>
+                            <td><b>ΑΦΜ</b></td>
+                            <td>@Model.Client.AFM</td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Τηλέφωνο</b></td>
+                            <td style="@(string.IsNullOrEmpty(Model.Client.PhoneNumber) ? "color:var(--danger);" : "color:var(--success);")">
+                                @(string.IsNullOrEmpty(Model.Client.PhoneNumber) ? "Μη διαθέσιμο" : "(+30) " + Model.Client.PhoneNumber)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>Πακέτο</b></td>
+                            <td>
+                                @{
+
+                                    if (Model.Phone == null ||
+                                    Model.Package == null ||
+                                    string.IsNullOrEmpty(Model.Client.PhoneNumber) ||
+                                    string.IsNullOrEmpty(Model.Phone.Package))
+                                    {
+                                        <p>-</p>
+                                        
+                                    } else {
+
+                                    <div class="popover-container">
+                                        <div class="popover-btn">
+                                            <span style="background-color: var(--light-gray);">@Model.Phone.Package</span>
+                                        </div>
+
+                                        <div class="popover-content">
+
+                                            <table class="hoverable">
+                                                <thead>
+                                                    <tr><td>Πληροφορίες Πακέτου</td></tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><b>Δεδομένα Κινητής Τηλεφωνίας</b></td>
+                                                        <td>@Model.Package.MB</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td><b>Μηνύματα SMS</b></td>
+                                                        <td>@Model.Package.SMS</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td><b>Λεπτά Ομιλίας Προς Όλους</b></td>
+                                                        <td>@Model.Package.TotalMinutes'</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td><b>Λεπτά Ομιλίας Προς Εξωτερικό</b></td>
+                                                        <td>@Model.Package.TotalMinutesAbroad'</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+
+                                    }
+                                }
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>Ημερομηνία Έκδοσης</b></td>
+                            <td>
+                                @{
+
+                                    if (Model.Phone == null || Model.Package == null || Model.Phone.issuedDate == null)
+                                    {
+                                        <p>-</p>
+                                       
+                                    } else {
+
+                                    @Model.Phone.issuedDate
+                                    }
+                                }
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Προθεσμία Πληρωμής</b></td>
+                            <td>
+
+                                @{
+
+                                    if (Model.Phone == null || Model.Package == null || Model.Phone.renewDate == null)
+                                    {
+                                        <p>-</p>
+                                        
+                                    } else {
+                                    <span class="bill-issued">@Model.Phone.renewDate <a asp-controller="Client" asp-action="Bill" class="btn renew-btn">Εξόφληση</a></span>
+                                    }
+                                }
+
+
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

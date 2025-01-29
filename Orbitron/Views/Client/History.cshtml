@@ -1,0 +1,54 @@
+﻿@model Orbitron.Models.ViewModels.CallClientViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Call History";
+}
+
+<link rel="stylesheet" href="~/css/client/history.css" asp-append-version="true" />
+
+<div class="history-container">
+
+
+
+    <div class="client-control">
+        <div class="links">
+            <a class="client-link hover-underline" asp-controller="Client" asp-action="Account">Προβολή Λογαριασμού</a>
+            <a class="client-link hover-underline active" asp-controller="Client" asp-action="History">Προβολή Ιστορικού Κλήσεων</a>
+            <a class="client-link hover-underline" asp-controller="Client" asp-action="Bill">Εξόφληση Λογαριασμού</a>
+        </div>
+    </div>
+
+
+    <div class="calls-container">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Κλήση Προς</th>
+                    <th>Έναρξη Κλήσης</th>
+                    <th>Τερματισμός Κλήσης</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @{
+                    if (!Model.Calls.Any())
+                    {
+                    } else {
+                    foreach(Call call in Model.Calls) {
+                        <tr><td>@call.PhoneReceiver</td><td>@call.Started</td><td>@call.Ended</td></tr>
+                    }
+                    }
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+
+
+</div>
+

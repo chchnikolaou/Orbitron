@@ -1,0 +1,76 @@
+﻿body {
+}
+
+.admin-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+
+div .admin-control {
+    background-color: var(--light-gray);
+    line-height: 80px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+
+.admin-control .links {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 3.25rem;
+    justify-content: space-evenly;
+    list-style-type: none;
+    cursor: pointer;
+}
+
+    .admin-control .links a:hover {
+        color: var(--primary);
+    }
+
+h2 {
+    padding: 5px;
+    margin-top: 10px;
+}
+
+form {
+    width: 650px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    text-align: left;
+    color: var(--black);
+    padding: 10px;
+    background-color: var(--light-gray);
+    font-weight: 500;
+}
+
+form label {
+    font-weight: 500;
+}
+
+label, input, select {
+    width: 99%;
+    color: var(--black);
+}
+
+
+input:not(button), select {
+    height: 30px;
+}
+
+#description {
+    resize: none;
+    width: 100%;
+}

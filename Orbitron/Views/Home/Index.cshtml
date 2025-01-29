@@ -1,0 +1,68 @@
+﻿@model List<Package>
+@{
+    ViewData["Title"] = "Home";
+}
+<link rel="stylesheet" href="~/css/index.css" asp-append-version="true"/>
+
+<div class="container-200 home">
+
+    <div class="home-text">
+        <h2>Orbitron</h2>
+        <p>Επαναπροσδιορίζοντας τη συνδεσιμότητα με καινοτόμες λύσεις κινητής τηλεφωνίας.</p>
+        <div class="btn"><a href="#packages">Δες τα πακέτα</a></div>
+    </div>
+
+    <img src="/images/5g.png" alt=""/>
+
+</div>
+
+<div class="container-300 package-info" id="packages">
+    <h2>Πακέτα Τηλεφωνίας</h2>
+    <div class="packages">
+
+        @foreach(var package in Model) {
+
+            <div class="package">
+                <a class="package-title" href="">@package.Name</a>
+                <p style="font-size:18px;"><b>@package.Cost€</b></p>
+                <p class="package-description">@package.Description</p>
+                <div class="package-benefits">
+                    <ul>
+                        <li class="package-benefit">Λεπτά προς όλους: @package.TotalMinutes'</li>
+                        <li class="package-benefit">Λεπτά προς όλους στο εξωτερικό: @package.TotalMinutesAbroad'</li>
+                        <li class="package-benefit">Διαθέσιμα μηνύματα: @package.SMS</li>
+                        <li class="package-benefit">Διαθέσιμα MB: @package.MB</li>
+                    </ul>
+                </div>
+                <div class="btn package-btn">Το θέλω</div>
+            </div>
+        }
+        
+
+    </div>
+    </div>
+    <div class="faq container-300" id="faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <button class="faq-question">1. Πώς μπορώ να χρησιμοποιήσω να αγοράσω πακέτο;<span>+</span></button>
+            <div class="faq-answer">
+                <p>Η Orbitron προσφέρει πολλά πακέτα για όλους τους τύπους χρήστες. 
+                    Για την αγορά του πακέτου σας, επισκεφθείτε ένα από τα διαθέσιμα μας καταστήματα ή ανοίξτε ένα support ticket 
+                    <a style="color:var(--primary);" href="#" onclick="showToast('Tickets are unavailable at the moment.', 'error')">εδώ</a>.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question">2. Μπορώ να ανανεώσω το πακέτο μου από την εφαρμογή; <span>+</span></button>
+            <div class="faq-answer">
+                <p>Εννοείται! Η εφαρμογή μας παρέχει την δυνατότητα ανανέωσης του πακέτου σας μέσω χρεωστικής/πιστώτικης κάρτας ή Paypal.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question">3. Αν τελειώσει το τρέχον πακέτο μου, εξακολουθώ να λαμβάνω κλήσεις από άλλους;<span>+</span></button>
+            <div class="faq-answer">
+                <p>Ακόμη και με τον τερματισμό του πακέτου του αριθμού τηλεφώνου σας, έχετε τη δυνατότητα να λαμβάνετε κλήσεις κανονικά από άλλους. Ωστόσο
+                    για να πραγματοποιήσετε κλήσεις προερχόμενες από εσάς, θα πρέπει να προβείτε στην απόκτηση ενός πακέτου.
+                </p>
+            </div>
+        </div>
+    </div>

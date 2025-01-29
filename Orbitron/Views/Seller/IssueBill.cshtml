@@ -1,0 +1,179 @@
+﻿@model Orbitron.Models.ViewModels.CallClientViewModel
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+<div class="bill-issue-container">
+
+
+    <div class="client-control">
+
+        <div class="links">
+            <a class="client-link hover-underline" asp-controller="Seller" asp-action="AddClient">Καταχώρηση Πελάτη</a>
+            <a class="client-link hover-underline active" asp-controller="Seller" asp-action="IssueBill">Έκδοση Λογαριασμού Πελατών</a>
+            <a class="client-link hover-underline" asp-controller="Seller" asp-action="ChangeProgram">Αλλαγή Προγράμματος Πελάτη</a>
+        </div>
+    </div>
+
+    <div class="issue-container">
+        <form asp-controller="Seller" asp-action="IssueBill" method="post">
+            <label for="afm">ΑΦΜ:* <input type="text" name="afm" id="afm" placeholder="ΑΦΜ" required/></label>
+            <label for="fromdate">Από:* <input type="date" name="fromdate" id="fromdate" required/></label>
+            <label for="nextdate">Έως:* <input type="date" name="nextdate" id="nextdate" required/></label>
+            <button type="submit" class="btn">Αναζήτηση</button>
+        </form>
+
+
+        @if (Model.Client != null) {
+
+            <div class="small-container">
+                <hr />
+                <p><b>Όνομα Πελάτη:</b> @Model.Client.FirstName @Model.Client.LastName</p>
+            <p><b>ΑΦΜ:</b> @Model.Client.AFM</p>
+            
+            @if(!string.IsNullOrEmpty(Model.Client.PhoneNumber)) {
+                <p><b>Τηλέφωνο:</b> @Model.Client.PhoneNumber</p>
+            } else {
+                    <p><b>Τηλέφωνο: </b>-</p>
+            }
+            <hr />
+        @if(string.IsNullOrEmpty(Model.Client.PhoneNumber)) {
+            <p style="color:var(--danger);">Ο πελάτης δεν έχει τρέχον πακέτο.</p>
+            <p><b>Κόστος:</b> 0.00€</p>
+        } else {
+            <p style="color:var(--success);">Ο πελάτης διαθέτει ισχύον πακέτο.</p>
+            <p><b>Κόστος:</b> @Model.Package.Cost €</p>
+        }
+                <hr />
+                </div>
+        }
+        </div>
+        <table>
+            <thead>
+                <tr><th>Κλήση Από</th><th>Κλήση Προς</th><th>Διάρκεια Κλήσης</th><th>Ημερομηνία Κλήσης</th></tr>
+            </thead>
+
+            <tbody>
+                @foreach(var call in Model.Calls) {
+                    <tr><td>@call.PhoneSender</td><td>@call.PhoneReceiver</td><td>@call.ParseDuration()</td></tr>
+                }
+                
+            </tbody>
+        </table>
+       
+    </div>
+
+
+</div>
+
+
+
+<style>
+.bill-issue-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+div .client-control {
+    background-color: var(--light-gray);
+    line-height: 80px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+
+.client-control .links {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 3.25rem;
+    justify-content: space-evenly;
+    list-style-type: none;
+    cursor: pointer;
+}
+
+.client-control .links a:hover {
+    color: var(--primary);
+}
+
+.issue-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    place-items: center;
+    width: 100%;
+    min-height: 300px;
+    background-color: var(--light-gray);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    width: 40%;
+    min-height: 350px;
+    max-height: 700px;
+
+    border-radius: 7px;
+    margin-top: 15px;
+    place-items: center;
+}
+
+form label {
+    font-weight: 500;
+}
+
+label, input {
+    width: 99%;
+    color: var(--black);
+}
+
+
+input:not(button) {
+    height: 30px;
+}
+
+table {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+p {
+    font-size: 18px;
+    color: var(--black);
+    padding: 7px;
+    border-radius: 1999px;
+    transition: all ease-in-out .3s;
+    
+}
+
+p:hover {
+    transform: translateY(-1px);
+    cursor:grab;
+}
+
+.small-container {
+    width: 100%;
+    padding: 5px;
+    border-radius: 3px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: left;
+}
+
+</style>
+
+

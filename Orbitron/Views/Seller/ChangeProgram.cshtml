@@ -1,0 +1,43 @@
+﻿@model List<Package>
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<link rel="stylesheet" href="~/css/seller/changeprogram.css" asp-append-version="true" />
+<div class="seller-container">
+
+
+    <div class="client-control">
+
+        <div class="links">
+            <a class="client-link hover-underline">Καταχώρηση Πελάτη</a>
+            <a class="client-link hover-underline" asp-controller="Seller" asp-action="IssueBill">Έκδοση Λογαριασμού Πελατών</a>
+            <a class="client-link hover-underline active" asp-controller="Seller" asp-action="ChangeProgram">Αλλαγή Προγράμματος Πελάτη</a>
+        </div>
+    </div>
+
+    <h2>Αλλαγή Προγράμματος Πελάτη</h2>
+    <form asp-controller="Seller" asp-action="ChangeProgram" method="post">
+        
+        <label for="afm">ΑΦΜ*:
+            <input type="text" name="afm" id="afm" required placeholder="ΑΦΜ"/>
+        </label>
+
+        <label for="package">Πακέτο*:
+            <select name="package" id="package" class="desired-package" required>
+            <option selected disabled>Πακέτο</option>
+            @foreach (var package in Model) {
+                <option>@package.Name</option>
+            }
+        </select>
+        </label>
+        
+
+        <button type="submit" class="btn">Καταχώρηση</button>
+        </form>
+        
+    
+    </div>
+

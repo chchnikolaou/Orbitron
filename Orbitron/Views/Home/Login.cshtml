@@ -1,0 +1,24 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+    ViewData["TITLE"] = "Login";
+
+}
+<link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+
+
+<div class="container login">
+
+
+    <form asp-controller="User" asp-action="Login" method="post">
+        <h3>Συμπλήρωσε τα στοιχεία σου</h3>
+        <input type="text" name="Username" placeholder="Username" required/>
+        <input type="password" name="Password" placeholder="Password" required/>
+        <button type="submit" class="btn">Σύνδεση</button>
+        <a asp-controller ="Home" asp-action="Register">Δεν έχεις λογαριασμό; Κάνε εγγραφή.</a>
+
+    </form>
+
+</div>

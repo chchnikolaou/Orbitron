@@ -1,0 +1,91 @@
+﻿@model List<Package>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<link rel="stylesheet" href="~/css/seller/addclient.css" asp-append-version="true" />
+@* <script src="~/js/popover.js" asp-append-version="true"></script> *@
+
+<script>
+    function toggleElements() {
+        let checkbox = document.getElementById("existingclient");
+        var inputs = document.querySelectorAll('.client-registration input');
+        if(checkbox.checked) {
+            inputs.forEach(function (input) {
+            input.disabled = false;
+            input.value="";
+ 
+        });
+            return;
+        }
+        inputs.forEach(function (input) {
+        input.disabled = true;
+        input.value="";
+
+            });
+       
+    }
+</script>
+
+<div class="seller-container">
+
+
+    <div class="client-control">
+
+        <div class="links">
+            <a class="client-link hover-underline active">Καταχώρηση Πελάτη</a>
+            <a class="client-link hover-underline" asp-controller="Seller" asp-action="IssueBill">Έκδοση Λογαριασμού Πελατών</a>
+            <a class="client-link hover-underline" asp-controller="Seller" asp-action="ChangeProgram">Αλλαγή Προγράμματος Πελάτη</a>
+        </div>
+    </div>
+
+    <h2>Καταχώρηση Στοιχείων Πελάτη</h2>
+    <form asp-controller="Seller" asp-action="RegisterClient" method="post">
+        <label for="afm">AFM<span class="required">*: </span><input type="text" name="afm" id="afm" placeholder="AFM" required/></label>
+       
+        <div class="existing-client">
+            <label for="existingclient"><span>Καινούργιος λογαριασμός; </span><input type="checkbox" name="existingclient" id="existingclient" onclick="toggleElements()" value=true checked/></label>
+        </div>
+       <div class="client-registration">
+           <div class="input-fields">
+                <label for="firstname">First Name<span class="required">*: </span><input type="text" name="firstname" id="firstname" placeholder="First Name" /></label>
+                <label for="username">Username<span class="required">*: </span><input type="text" name="username" id="username" placeholder="Username" /></label>
+           </div>
+            
+           <div class="input-fields">
+                <label for="lastname">Last Name<span class="required">*: </span><input type="text" name="lastname" id="lastname" placeholder="Last Name" /></label>
+  
+                <label for="password">Password<span class="required">*: </span><input type="text" name="password" id="password" placeholder="Password" /></label>
+           </div>
+            
+
+        </div>
+
+        <div class="client-info">
+            <h3>Στοιχεία Τηλεφώνου</h3>
+            <label for="phone">Αριθμός Τηλεφώνου:
+                <input type="text" name="phone" id="phone" maxlength="10" minlength="10"/>
+            </label>
+            <label for="package">Πακέτο:
+                <select name="package" id="package">
+                    <option selected disabled>Πακέτο</option>
+                    @foreach(var package in Model) {
+                        <option value=@package.Name>@package.Name</option>
+                    }
+                </select>
+            </label>
+
+
+            <label for="renew-date">Προσθεμία Πληρωμής:
+                <input type="date" name="renewdate" id="renewdate" />
+            </label>
+        </div>
+
+
+        <button type="submit" class="btn">Καταχώρηση</button>
+
+    </form>
+
+
+</div>

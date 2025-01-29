@@ -1,0 +1,240 @@
+﻿@model Orbitron.Models.ViewModels.ClientPhoneViewModel
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["TITLE"] = "Bill Payment";
+}
+
+<script>
+
+    function toggleRadio() {
+        var radio_buttons = document.getElementsByName('radio-btn');
+        var cardInputs = document.querySelectorAll('.input-fields input');
+
+        for (var i = 0; i < radio_buttons.length; i++) {
+            if (radio_buttons[i].checked) {
+                if (radio_buttons[i].value === "paypal") {
+
+                    cardInputs.forEach(function (input) {
+                        input.disabled = true;
+                        input.value="";
+                    });
+                } else {
+
+                    cardInputs.forEach(function (input) {
+                        input.disabled = false;
+                    });
+                }
+                break;
+            }
+        }
+    }
+
+</script>
+
+<div class="bill-container">
+
+    <div class="client-control">
+
+        <div class="links">
+            <a class="client-link hover-underline" asp-controller="Client" asp-action="Account">Προβολή Λογαριασμού</a>
+            <a class="client-link hover-underline" asp-controller="Client" asp-action="History">Προβολή Ιστορικού Κλήσεων</a>
+            <a class="client-link hover-underline active" asp-controller="Client" asp-action="Bill">Εξόφληση Λογαριασμού</a>
+        </div>
+    </div>
+
+    <form asp-controller="Client" asp-action="Pay" class="container">
+
+
+        <div class="bill-info">
+            <h2>Πληρωμή Λογαριασμού</h2>
+            <div>
+                @if (Model.Package != null && Model.Phone.Package == Model.Package.Name)
+                {
+                    <a>💵 Κόστος: @Model.Package.Cost €</a>
+                }
+                else
+                {
+                    <a>💵 Κόστος: 0.00€</a>
+                }
+            
+        </div>
+        </div>
+
+        <div class="payment-option">
+
+            <label for="radio-btn1">Credit/Debit Card 
+                <img class="card" src="~/images/visa.png" alt="Visa"/>
+                <img class="card" src="~/images/mastercard.png" alt="Mastercard"/><input type="radio" name="radio-btn" id="radio-btn1" class="radio-btn" value="card" onclick="toggleRadio()" checked/></label>
+            <div class="input-fields">
+                <input type="text" placeholder="Αριθμός Κάρτας" name="cardNumber" />
+                <input type="text" placeholder="Όνομα Κατόχου Κάρτας" name="cardHolder" />
+            </div>
+
+            <div class="input-fields">
+                <input type="date" placeholder="MM/YY" name="cardEndDate" />
+                <input type="text" placeholder="Κωδικός CVV" name="cardCVV" />
+            </div>
+
+            <div class="payment-description">
+                <a style="color:var(--black-opac)"><img class="img_info" src="~/images/info.png" alt="info: " /> Pay securely with your Bank Account using Visa or Mastercard</a>
+            </div>
+
+        </div>
+        <div class="payment-option">
+
+            <label for="radio-btn2">
+                Pay With Paypal <img src="~/images/paypal.png" alt="Pay with Paypal" />
+                <input type="radio" name="radio-btn" id="radio-btn2" class="radio-btn" onclick="toggleRadio()" value="paypal" />
+                </label>
+                <div class="payment-description">
+                    <a style="color:var(--black-opac)"><img class="img_info" src="~/images/info.png" alt="info: "/> If Paypal is selected, you will be redirected to Paypal's website to complete your order securely.</a>
+                </div>
+        </div>
+        <button type="submit" class="btn">Pay</button>
+
+
+    </form>
+</div>
+
+
+
+
+<style>
+
+
+div .client-control {
+    background-color: var(--light-gray);
+    line-height: 80px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+}
+
+
+.client-control .links {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 3.25rem;
+    justify-content: space-evenly;
+    list-style-type: none;
+    cursor: pointer;
+}
+
+    .client-control .links a:hover {
+        color: var(--primary);
+    }
+
+.bill-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+form {
+    width: 650px;
+    max-height: 700px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    place-items: center;
+    justify-content: center;
+    background-color: var(--light-gray);
+    border-radius: 7px;
+    box-shadow: var(--light-gray) 0px 3px 40px;
+    gap: 3rem;
+    padding: 10px;
+}
+
+label {
+    display: flex;
+    flex-direction: row-reverse;
+    place-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    gap: 2.25rem;
+    padding: 5px;
+}
+
+input {
+    padding: 5px;
+}
+
+input[type="radio"] {
+    width: 25px;
+    height: 25px;
+}
+
+
+button {
+    border: none;
+}
+
+input:not(input[type="radio"]) {
+    width: 250px;
+    height: 30px;
+}
+
+#cost{
+    color: var(--black);
+    font-weight: 450;
+}
+
+.bill-info {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.payment-option {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+}
+
+img {
+    width: 100px;
+    height: 80px;
+}
+
+img.card {
+    width: 58px;
+    height: 28px;
+}
+
+.payment-description {
+    display: flex;
+    flex-direction: row;
+    place-items: center;
+    background-color: var(--gray);
+    border-radius: 7px;
+
+    border: 1px solid var(--gray);
+    padding: 10px;
+    max-width: 550px;
+    transition: all ease-out .2s;
+}
+
+.payment-description:hover {
+    box-shadow: rgba(127,127,127,0.25) 0px 3px 10px;
+}
+
+.payment-description a{
+
+    text-decoration: underline;
+}
+
+</style>
+
+
+

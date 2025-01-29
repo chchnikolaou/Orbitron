@@ -1,0 +1,112 @@
+﻿body {
+}
+
+.seller-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+
+div .client-control {
+    background-color: var(--light-gray);
+    line-height: 80px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+
+.client-control .links {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 3.25rem;
+    justify-content: space-evenly;
+    list-style-type: none;
+    cursor: pointer;
+}
+
+.client-control .links a:hover {
+    color: var(--primary);
+}
+
+h2 {
+    padding: 5px;
+    margin-top: 10px;
+}
+
+form {
+
+    width: 650px;
+    min-height: 600px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    gap: 1.25rem;
+    color: var(--black);
+    padding: 10px;
+    background-color: var(--light-gray);
+
+}
+
+form label {
+    font-weight: 500;
+}
+
+label, input {
+    width: 100%;
+}
+ 
+
+input:not(button){
+    height: 30px;
+
+}
+
+
+
+.existing-client, .client-registration {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    place-items: center;
+    width: 100%;
+    gap: 0.75rem;
+}
+
+.existing-client input {
+    width: 30px;
+    height: 17px;
+    background: blue;
+}
+
+.existing-client span {
+    text-decoration: underline;
+}
+
+.client-info {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+
+    width: 100%;
+}
+
+.client-info h3 {
+    border-bottom: 1px solid var(--gray);
+    padding: 3px;
+}
+
+select {
+    width: 100%;
+    height: 30px;
+}

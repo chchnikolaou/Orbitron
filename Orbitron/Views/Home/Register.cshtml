@@ -1,0 +1,32 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+    ViewData["TITLE"] = "Register";
+
+}
+
+<link rel="stylesheet" href="~/css/register.css" asp-append-version="true" />
+
+<div class="container register">
+
+    <form asp-controller="User" asp-action="Create" method="post">
+        <h3>Συμπλήρωσε τα στοιχεία σου</h3>
+
+        <div class="input-fields">
+            <input type="text" name="FirstName" placeholder="First Name" required/>
+            <input type="text" name="LastName" placeholder="Last Name" required/>
+        </div>
+        
+        <div class="input-fields">
+            <input type="text" name="Username" placeholder="Username" required/>
+            <input type="password" name="Password" placeholder="Password" required/>
+        </div>
+
+        <button type="submit" class="btn">Εγγραφή</button>
+        <a asp-controller="Home" asp-action="Login">Έχεις ήδη λογαριασμό; Κάνε σύνδεση.</a>
+
+    </form>
+
+</div>

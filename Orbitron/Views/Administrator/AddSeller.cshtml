@@ -1,0 +1,29 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["TITLE"] = "Add Seller";
+}
+<link rel="stylesheet" href="~/css/admin/addseller.css" asp-append-version="true" />
+<div class="admin-container">
+
+
+    <div class="admin-control">
+
+        <div class="links">
+            <a class="client-link hover-underline active" asp-controller="Administrator" asp-action="AddSeller">Καταχώρηση Πωλητή</a>
+            <a class="client-link hover-underline" asp-controller="Administrator" asp-action="AddPackage">Δημιουργία Προγράμματος</a>
+            <a class="client-link hover-underline" asp-controller="Administrator" asp-action="AlternatePackage">Αλλαγή Χαρακτηριστικών Προγράμματος</a>
+        </div>
+    </div>
+
+    <h2>Καταχώρηση Πωλήτη</h2>
+    <form asp-controller="Administrator" asp-action="AddSellerAction" method="post">
+
+        <label for="userid">User ID*:
+            <input type="text" name="userid" id="userid" placeholder="ID"/>
+        </label>
+        <button type="submit" class="btn">Καταχώρηση</button>
+    </form>
+
+    </div>

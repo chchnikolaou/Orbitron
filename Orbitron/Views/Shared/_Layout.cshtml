@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Orbitron - @ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    
+</head>
+
+<body>
+    <div id="toast-container" style="position: fixed; bottom: 1rem; right: 1rem; z-index: 1050;"></div>
+    <header>
+        <div class="brand">
+            <a asp-controller="Home" asp-action="Index"><img src="/images/logo_text.png" /></a>
+        </div>
+        <div class="links">
+            <div class="links-btns">
+                <a class="@((ViewContext.RouteData.Values["action"]?.ToString() == "Index") ? "hover-underline active" : "hover-underline")" asp-controller="Home" asp-action="Index">Home</a>
+                <a class="@((ViewContext.RouteData.Values["action"]?.ToString() == "Login" || ViewContext.RouteData.Values["action"]?.ToString() == "Register") ? "hover-underline active" : "hover-underline")" asp-controller="Home" asp-action="Login">My Orbitron</a>
+                <a class="@((ViewContext.RouteData.Values["action"]?.ToString() == "FAQs") ? "hover-underline active" : "hover-underline")" href="#">FAQs</a>
+ 
+            </div>
+        </div>
+        @if(User.Identity == null || !User.Identity.IsAuthenticated) {
+            <a class="cto" asp-controller="Home" asp-action="Login"><span class="btn">Login</span></a>
+        } else {
+            <a class="cto" asp-controller="User" asp-action="Logout"><span class="btn">Logout</span></a>
+        }
+     
+    </header>
+    <nav class="control-menu">
+
+        <a asp-controller="Client" asp-action="Account">Client Portal</a>
+        <a asp-controller="Seller" asp-action="AddClient">Seller Portal</a>
+        <a asp-controller="Administrator" asp-action="AddSeller">Administrator Portal</a>
+
+    </nav>
+    <div class="">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer>
+
+        <div class="trademarks">
+            &copy; 2025 - Orbitron
+            <a href="https://github.com/chchnikolaou/">Made By chchnikolaou</a>
+        </div>
+        <div class="footer-links">
+            <div class="portal">
+                <h2>Portals</h2>
+                <a asp-controller="Client" asp-action="Account">Client Portal</a>
+                <a asp-controller="Seller" asp-action="AddClient">Seller Portal</a>
+                <a asp-controller="Administrator" asp-action="AddSeller">Administrator Portal</a>
+            </div>
+            <div class="portal">
+                <h2>Support</h2>
+                <a href="#faq">Frequently Asked Questions</a>
+                <a href="#" onclick="showToast('Tickets are unavailable at the moment.', 'error')">Make a Ticket</a>
+            </div>
+        </div>
+    </footer>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+        <script>
+            const errorMessage = '@TempData["ErrorMessage"]';
+            const successMessage = '@TempData["SuccessMessage"]';
+            const infoMessage = '@TempData["InfoMessage"]';
+
+            if (errorMessage) {
+                showToast(errorMessage, "error");
+            }
+
+            if (successMessage) {
+                showToast(successMessage, "success");
+            }
+
+            if (infoMessage) {
+                showToast(infoMessage, "info");
+            }
+        </script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+
+</body>
+
+
+
+</html>
+
+
+

@@ -1,0 +1,66 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+    ViewData["Title"] = "Validate ΑΦΜ";
+
+}
+
+<div class="validate-afm container-200">
+    <form asp-controller="Client" asp-action="SetAFM">
+
+        <label for="AFM">Συμπλήρωσε το ΑΦΜ σου.</label>
+        <input type="text" placeholder="ΑΦΜ" name="AFM" id="AFM" />
+        <button type="submit" class="btn">ΟΚ</button>
+
+
+    </form>
+</div>
+
+
+
+
+<style>
+
+    .validate-afm {
+        width: 100%;
+        display: flex;
+        place-items: center;
+        justify-content: center;
+
+    }
+
+    form {
+        width: 400px;
+        height: 300px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        place-items: center;
+        justify-content: center;
+        background-color: var(--light-gray);
+        border-radius: 7px;
+        box-shadow: var(--light-gray) 0px 3px 40px;
+        gap: 2rem;
+    }
+
+    label {
+        margin-bottom: 10px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    label, input {
+        padding: 5px;
+    }
+
+    button {
+        border: none;
+    }
+
+    input {
+        width: 160px;
+        height: 30px;
+    }
+</style>
