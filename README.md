@@ -28,4 +28,3 @@ Development Environment: Visual Studio 2022
     "DefaultConnectionString": "" // <-- Δώσε Connection String από το Data Connection
   }
 }
-```
