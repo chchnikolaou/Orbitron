@@ -184,6 +184,12 @@ namespace Orbitron.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
+            if(await getClient(afm) != null)
+            {
+                TempData["ErrorMessage"] = "A client with this ΑΦΜ already exists.";
+                return RedirectToAction("Account", "Client");
+            }
+
             client.AFM = afm;
             await _context.SaveChangesAsync();
 
@@ -255,6 +261,7 @@ namespace Orbitron.Controllers
             return await _context.Clients.AnyAsync(u => u.Id == userId);
         }
 
+        private async Task<Client> getClient(string afm) => await _context.Clients.FirstOrDefaultAsync(u => u.AFM == afm);
         private async Task<Client> getClient(int userId) => await _context.Clients.FirstOrDefaultAsync(u => u.Id == userId);
         private async Task<Phone> getPhone(string phone) => await _context.Phones.FirstOrDefaultAsync(p => p.Number == phone);
         private async Task<Package> getPackage(string package) => await _context.Packages.FirstOrDefaultAsync(p => p.Name == package);

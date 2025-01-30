@@ -46,7 +46,7 @@ namespace Orbitron.Controllers
                     Password = user.Password,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
-                    Property = user.Property
+                    Property = Property.Client
                 };
                 _context.Clients.Add(client);
                 await _context.SaveChangesAsync();
